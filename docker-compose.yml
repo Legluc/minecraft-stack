@@ -6,7 +6,7 @@ services:
       TYPE: "PAPER"
       MEMORY: "2G"
     ports:
-      - "25566:25565"
+      - "12000:25565"
     volumes:
       - minecraft-data:/data
       - ./plugins:/data/plugins
@@ -14,8 +14,17 @@ services:
       - internal
     restart: unless-stopped
 
+  landing:
+    build: ./landing
+    ports:
+      - "80:3000"
+    networks:
+      - public
+    restart: unless-stopped
+
 volumes:
   minecraft-data:
 
 networks:
   internal:
+  public:
