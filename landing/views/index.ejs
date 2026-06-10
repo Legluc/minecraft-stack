@@ -5,57 +5,507 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%= serverName %></title>
     <link rel="stylesheet" href="/css/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Nunito:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
   </head>
-  <body
-    class="bg-gray-900 text-white min-h-screen flex flex-col items-center justify-center px-4"
-  >
-    <div class="max-w-2xl w-full text-center">
-      <!-- Header -->
-      <div class="mb-10">
-        <h1 class="text-5xl font-bold text-green-400 mb-3">
-          ⛏ <%= serverName %>
+
+  <body class="bg-mc-night text-white font-sans overflow-x-hidden">
+    <!-- ══════════════════════════════════════════════
+         HERO — ciel nocturne + bande herbe/terre
+    ══════════════════════════════════════════════ -->
+    <section
+      class="relative min-h-screen flex flex-col items-center justify-center overflow-hidden"
+      style="
+        background: linear-gradient(
+          to bottom,
+          #020810 0%,
+          #060f1e 40%,
+          #0d2340 65%,
+          #5b8731 65%,
+          #5b8731 74%,
+          #6b4226 74%
+        );
+      "
+    >
+      <!-- Décorations flottantes -->
+      <span
+        class="absolute top-14 left-10 text-3xl opacity-20 animate-float"
+        style="animation-delay: 0s"
+        >🌲</span
+      >
+      <span
+        class="absolute top-28 right-14 text-2xl opacity-20 animate-float"
+        style="animation-delay: 0.7s"
+        >⚔️</span
+      >
+      <span
+        class="absolute top-52 left-1/4 text-xl opacity-10 animate-float"
+        style="animation-delay: 1.4s"
+        >💎</span
+      >
+      <span
+        class="absolute top-20 right-1/3 text-2xl opacity-15 animate-float"
+        style="animation-delay: 0.3s"
+        >🏹</span
+      >
+      <span
+        class="absolute top-44 right-8 text-xl opacity-10 animate-float"
+        style="animation-delay: 1.8s"
+        >🪓</span
+      >
+      <!-- Lune -->
+      <span class="absolute top-12 right-20 text-5xl opacity-70 select-none"
+        >🌙</span
+      >
+
+      <!-- Contenu principal -->
+      <div
+        class="relative z-10 text-center px-6 max-w-4xl mx-auto"
+        style="margin-bottom: 12rem"
+      >
+        <div class="text-7xl mb-8 animate-float">⛏️</div>
+
+        <h1
+          class="font-minecraft text-2xl md:text-4xl lg:text-5xl text-mc-green-bright mb-6 leading-relaxed"
+          style="
+            text-shadow:
+              4px 4px 0 #2d5016,
+              0 0 50px rgba(126, 200, 80, 0.35);
+          "
+        >
+          <%= serverName %>
         </h1>
-        <p class="text-gray-400 text-lg">
-          Bienvenue sur notre serveur Minecraft communautaire
+
+        <p
+          class="text-mc-sky text-lg md:text-xl font-bold mb-10 tracking-wide"
+          style="text-shadow: 2px 2px 0 #0a1628"
+        >
+          Serveur Communautaire · Java Edition · Survie
+        </p>
+
+        <!-- Badge IP cliquable -->
+        <div class="inline-block mb-6">
+          <button
+            onclick="copyIP()"
+            class="group flex items-center gap-4 border-2 border-mc-green bg-black/70 px-8 py-5 font-minecraft text-mc-green text-sm md:text-base hover:bg-mc-green/20 active:scale-95 transition-all duration-150 cursor-pointer"
+            style="box-shadow: 4px 4px 0 #2d5016"
+          >
+            <span class="text-mc-green-bright text-xl">▶</span>
+            <span class="tracking-wide"
+              ><%= serverAddress %>:<%= serverPort %></span
+            >
+            <span
+              class="text-gray-500 text-xs group-hover:text-mc-green-bright transition-colors"
+              >[ copier ]</span
+            >
+          </button>
+          <p
+            id="copy-feedback"
+            class="font-minecraft text-xs text-center mt-2 text-gray-600 min-h-5"
+          ></p>
+        </div>
+
+        <div
+          class="flex items-center justify-center gap-4 font-minecraft text-xs text-gray-500"
+        >
+          <span class="border border-gray-700 px-3 py-2">Paper 1.21</span>
+          <span class="border border-gray-700 px-3 py-2">Java Edition</span>
+          <span class="border border-gray-700 px-3 py-2">Survie</span>
+        </div>
+      </div>
+
+      <!-- Flèche scroll -->
+      <div
+        class="absolute z-10 font-minecraft text-gray-400 text-xs animate-bounce"
+        style="bottom: 5.5rem"
+      >
+        ▼ découvrir ▼
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════
+         À PROPOS — présentation communautaire
+    ══════════════════════════════════════════════ -->
+    <section class="bg-[#0E1A27] py-24 px-6">
+      <div class="max-w-5xl mx-auto">
+        <div class="text-center mb-16">
+          <p class="font-minecraft text-mc-green text-xs tracking-widest mb-4">
+            — À PROPOS —
+          </p>
+          <h2
+            class="font-minecraft text-xl md:text-3xl text-mc-green-bright leading-relaxed"
+            style="text-shadow: 3px 3px 0 #2d5016"
+          >
+            Une Communauté,<br />Une Aventure
+          </h2>
+        </div>
+
+        <div class="grid lg:grid-cols-2 gap-14 items-start">
+          <!-- Texte -->
+          <div class="space-y-6">
+            <p class="text-gray-300 leading-relaxed text-base md:text-lg">
+              Bienvenue sur
+              <span class="text-mc-green-bright font-bold"
+                ><%= serverName %></span
+              >, un serveur survie où l'entraide n'est pas une option, c'est une
+              philosophie. Que tu sois un vétéran qui connaît chaque recette par
+              cœur ou un tout nouveau venu qui découvre son premier Creeper, tu
+              trouveras toujours une main tendue et une équipe prête à
+              t'accueillir sans jugement.
+            </p>
+            <p class="text-gray-300 leading-relaxed text-base md:text-lg">
+              Notre monde est une invitation à l'aventure collective : explore
+              des biomes immenses, bâtis des projets ambitieux, repousse les
+              frontières du Nether et de l'End avec tes alliés. Ici, les
+              meilleures constructions et les plus beaux souvenirs se forgent en
+              équipe. Rejoins-nous et écris ta propre légende, bloc par bloc.
+            </p>
+            <div class="border-l-4 border-mc-green pl-5 py-1">
+              <p class="text-mc-green-light italic text-sm md:text-base">
+                "Le jeu est plus beau quand on le partage."
+              </p>
+            </div>
+          </div>
+
+          <!-- Cards features -->
+          <div class="grid grid-cols-2 gap-4">
+            <div
+              class="border-2 border-mc-green/50 bg-mc-green/10 p-6 text-center hover:bg-mc-green/20 transition-colors"
+            >
+              <div class="text-4xl mb-3">🏘️</div>
+              <div class="font-minecraft text-mc-green text-xs leading-relaxed">
+                Survie<br />Vanilla+
+              </div>
+              <p class="text-gray-500 text-xs mt-2">Sans mods, avec du cœur</p>
+            </div>
+            <div
+              class="border-2 border-blue-500/40 bg-blue-900/20 p-6 text-center hover:bg-blue-900/30 transition-colors"
+            >
+              <div class="text-4xl mb-3">🤝</div>
+              <div class="font-minecraft text-blue-300 text-xs leading-relaxed">
+                Entraide<br />&amp; Respect
+              </div>
+              <p class="text-gray-500 text-xs mt-2">Communauté bienveillante</p>
+            </div>
+            <div
+              class="border-2 border-amber-600/40 bg-amber-900/10 p-6 text-center hover:bg-amber-900/20 transition-colors"
+            >
+              <div class="text-4xl mb-3">🗺️</div>
+              <div
+                class="font-minecraft text-amber-300 text-xs leading-relaxed"
+              >
+                Monde<br />Immense
+              </div>
+              <p class="text-gray-500 text-xs mt-2">Exploration sans limites</p>
+            </div>
+            <div
+              class="border-2 border-purple-500/40 bg-purple-900/20 p-6 text-center hover:bg-purple-900/30 transition-colors"
+            >
+              <div class="text-4xl mb-3">🐉</div>
+              <div
+                class="font-minecraft text-purple-300 text-xs leading-relaxed"
+              >
+                End &amp;<br />Nether
+              </div>
+              <p class="text-gray-500 text-xs mt-2">
+                Défis &amp; boss collectifs
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════
+         CONNEXION
+    ══════════════════════════════════════════════ -->
+    <section class="bg-black py-24 px-6">
+      <div class="max-w-2xl mx-auto text-center">
+        <p class="font-minecraft text-mc-green text-xs tracking-widest mb-4">
+          — CONNEXION —
+        </p>
+        <h2
+          class="font-minecraft text-xl md:text-2xl text-mc-green-bright mb-12 leading-relaxed"
+          style="text-shadow: 3px 3px 0 #2d5016"
+        >
+          ⛏ Rejoindre le Serveur
+        </h2>
+
+        <div
+          class="border-4 border-mc-green p-8 mb-8"
+          style="
+            box-shadow:
+              8px 8px 0 #2d5016,
+              inset 0 0 40px rgba(91, 135, 49, 0.08);
+          "
+        >
+          <p class="font-minecraft text-gray-500 text-xs mb-4 tracking-widest">
+            ADRESSE DU SERVEUR
+          </p>
+
+          <button
+            id="ip-block"
+            onclick="copyIP()"
+            class="w-full bg-[#0A0A0A] border-2 border-gray-700 px-6 py-5 font-minecraft text-mc-green text-lg md:text-xl hover:border-mc-green transition-colors cursor-pointer"
+            style="text-shadow: 0 0 20px rgba(126, 200, 80, 0.5)"
+          >
+            <%= serverAddress %>:<%= serverPort %>
+          </button>
+
+          <p
+            id="copy-feedback-2"
+            class="font-minecraft text-xs mt-3 text-gray-600 min-h-5"
+          >
+            cliquer pour copier l'adresse
+          </p>
+
+          <div
+            class="grid grid-cols-3 gap-4 mt-8 pt-6 border-t border-gray-800"
+          >
+            <div class="text-center">
+              <div class="font-minecraft text-mc-green text-xs mb-2">
+                VERSION
+              </div>
+              <div class="text-gray-300 text-sm">Java 1.21+</div>
+            </div>
+            <div class="text-center">
+              <div class="font-minecraft text-mc-green text-xs mb-2">TYPE</div>
+              <div class="text-gray-300 text-sm">Paper</div>
+            </div>
+            <div class="text-center">
+              <div class="font-minecraft text-mc-green text-xs mb-2">MODE</div>
+              <div class="text-gray-300 text-sm">Survie</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Marche à suivre -->
+        <div class="bg-[#0A0A0A] border border-gray-800 p-6 text-left">
+          <p class="font-minecraft text-mc-green text-xs mb-5 tracking-widest">
+            COMMENT SE CONNECTER ?
+          </p>
+          <ol class="space-y-3 text-gray-400 text-sm">
+            <li>
+              <span class="text-mc-green font-bold mr-3">1.</span>Ouvre
+              <span class="text-gray-200">Minecraft</span> (Java Edition)
+            </li>
+            <li>
+              <span class="text-mc-green font-bold mr-3">2.</span>Clique sur
+              <span class="text-gray-200">Multijoueur</span>
+            </li>
+            <li>
+              <span class="text-mc-green font-bold mr-3">3.</span>Clique sur
+              <span class="text-gray-200">Ajouter un serveur</span>
+            </li>
+            <li>
+              <span class="text-mc-green font-bold mr-3">4.</span>Colle
+              l'adresse ci-dessus et connecte-toi !
+            </li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════
+         RÈGLES DU SERVEUR
+    ══════════════════════════════════════════════ -->
+    <section class="bg-[#0E1A27] py-24 px-6">
+      <div class="max-w-5xl mx-auto">
+        <div class="text-center mb-16">
+          <p class="font-minecraft text-mc-green text-xs tracking-widest mb-4">
+            — CHARTE —
+          </p>
+          <h2
+            class="font-minecraft text-xl md:text-2xl text-mc-green-bright leading-relaxed"
+            style="text-shadow: 3px 3px 0 #2d5016"
+          >
+            📜 Règles du Serveur
+          </h2>
+        </div>
+
+        <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-4">
+          <div
+            class="flex items-start gap-4 border border-mc-green/40 bg-mc-green/5 p-5 hover:brightness-110 transition-all"
+          >
+            <span class="text-3xl mt-1 shrink-0">🤝</span>
+            <div>
+              <h3 class="font-minecraft text-mc-green text-xs mb-2">
+                Respect mutuel
+              </h3>
+              <p class="text-gray-400 text-sm leading-relaxed">
+                Toute forme de harcèlement ou discrimination est bannie. On se
+                traite comme on voudrait être traité.
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="flex items-start gap-4 border border-red-500/40 bg-red-900/10 p-5 hover:brightness-110 transition-all"
+          >
+            <span class="text-3xl mt-1 shrink-0">🚫</span>
+            <div>
+              <h3 class="font-minecraft text-red-400 text-xs mb-2">
+                Zéro triche
+              </h3>
+              <p class="text-gray-400 text-sm leading-relaxed">
+                Hacks, cheats, exploits — banni définitivement. Le jeu équitable
+                est la base de notre communauté.
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="flex items-start gap-4 border border-blue-500/40 bg-blue-900/10 p-5 hover:brightness-110 transition-all"
+          >
+            <span class="text-3xl mt-1 shrink-0">🏗️</span>
+            <div>
+              <h3 class="font-minecraft text-blue-300 text-xs mb-2">
+                Protège les builds
+              </h3>
+              <p class="text-gray-400 text-sm leading-relaxed">
+                Ne jamais griffer, voler ou détruire les constructions des
+                autres. Le travail de chacun est sacré.
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="flex items-start gap-4 border border-yellow-500/40 bg-yellow-900/10 p-5 hover:brightness-110 transition-all"
+          >
+            <span class="text-3xl mt-1 shrink-0">😄</span>
+            <div>
+              <h3 class="font-minecraft text-yellow-300 text-xs mb-2">
+                Bonne humeur
+              </h3>
+              <p class="text-gray-400 text-sm leading-relaxed">
+                L'ambiance positive est notre priorité. Viens jouer, t'amuser et
+                partager de bons moments !
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="flex items-start gap-4 border border-emerald-500/40 bg-emerald-900/10 p-5 hover:brightness-110 transition-all"
+          >
+            <span class="text-3xl mt-1 shrink-0">🌿</span>
+            <div>
+              <h3 class="font-minecraft text-emerald-300 text-xs mb-2">
+                Éco-responsable
+              </h3>
+              <p class="text-gray-400 text-sm leading-relaxed">
+                Reboise après tes coupes, ferme tes fermes automatiques en
+                partant. Respecte le monde commun.
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="flex items-start gap-4 border border-purple-500/40 bg-purple-900/10 p-5 hover:brightness-110 transition-all"
+          >
+            <span class="text-3xl mt-1 shrink-0">💬</span>
+            <div>
+              <h3 class="font-minecraft text-purple-300 text-xs mb-2">
+                Chat sain
+              </h3>
+              <p class="text-gray-400 text-sm leading-relaxed">
+                Évite le spam et les insultes. Le chat est un espace friendly et
+                bienveillant pour tous les joueurs.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════
+         FOOTER
+    ══════════════════════════════════════════════ -->
+    <footer class="bg-[#060B14]">
+      <!-- Bande herbe + terre -->
+      <div class="h-2 bg-mc-green"></div>
+      <div class="h-3" style="background: #6b4226"></div>
+
+      <div class="py-12 px-6 text-center">
+        <div class="text-5xl mb-4 select-none">⛏️</div>
+        <p class="font-minecraft text-mc-green-bright text-sm mb-2">
+          <%= serverName %>
+        </p>
+        <p class="text-gray-500 text-sm mb-8">
+          Serveur communautaire · Survie Java Edition
+        </p>
+
+        <div class="flex items-center justify-center gap-4 mb-8 flex-wrap">
+          <span
+            class="font-minecraft text-xs text-gray-600 border border-gray-800 px-3 py-2"
+            >Paper</span
+          >
+          <span
+            class="font-minecraft text-xs text-mc-green border border-mc-green/30 px-3 py-2"
+            ><%= serverAddress %>:<%= serverPort %></span
+          >
+          <span
+            class="font-minecraft text-xs text-gray-600 border border-gray-800 px-3 py-2"
+            >Java</span
+          >
+        </div>
+
+        <p class="font-minecraft text-xs text-gray-700">
+          &copy; <%= new Date().getFullYear() %> &mdash; Fait avec ❤️ et
+          beaucoup de blocs
         </p>
       </div>
-
-      <!-- Connection info -->
-      <div class="bg-gray-800 rounded-2xl p-6 mb-8 border border-gray-700">
-        <h2 class="text-xl font-semibold text-green-300 mb-4">Se connecter</h2>
-        <div
-          class="flex items-center justify-center gap-3 bg-gray-900 rounded-xl px-5 py-3 font-mono text-green-400 text-lg"
-        >
-          <span><%= serverAddress %>:<%= serverPort %></span>
-        </div>
-        <p class="text-gray-500 text-sm mt-3">Version : Java Edition — Paper</p>
-      </div>
-
-      <!-- Rules -->
-      <div class="bg-gray-800 rounded-2xl p-6 border border-gray-700 text-left">
-        <h2 class="text-xl font-semibold text-green-300 mb-4">
-          Règles du serveur
-        </h2>
-        <ul class="space-y-2 text-gray-300">
-          <li class="flex items-start gap-2">
-            <span class="text-green-400">✔</span> Respecter tous les joueurs
-          </li>
-          <li class="flex items-start gap-2">
-            <span class="text-green-400">✔</span> Pas de triche ni de hack
-          </li>
-          <li class="flex items-start gap-2">
-            <span class="text-green-400">✔</span> Ne pas griffer les
-            constructions des autres
-          </li>
-          <li class="flex items-start gap-2">
-            <span class="text-green-400">✔</span> Bonne humeur obligatoire !
-          </li>
-        </ul>
-      </div>
-    </div>
-
-    <footer class="mt-12 text-gray-600 text-sm">
-      &copy; <%= new Date().getFullYear() %> <%= serverName %>
     </footer>
+
+    <script>
+      function copyIP() {
+        const ip = "<%= serverAddress %>:<%= serverPort %>";
+        const feedbacks = [
+          { el: document.getElementById("copy-feedback"), empty: "" },
+          {
+            el: document.getElementById("copy-feedback-2"),
+            empty: "cliquer pour copier l'adresse",
+          },
+        ];
+        const block = document.getElementById("ip-block");
+
+        navigator.clipboard
+          .writeText(ip)
+          .then(() => {
+            feedbacks.forEach(({ el }) => {
+              if (el) {
+                el.textContent = "✔ Copié dans le presse-papiers !";
+                el.style.color = "#7EC850";
+              }
+            });
+            if (block) block.style.borderColor = "#7EC850";
+
+            setTimeout(() => {
+              feedbacks.forEach(({ el, empty }) => {
+                if (el) {
+                  el.textContent = empty;
+                  el.style.color = "";
+                }
+              });
+              if (block) block.style.borderColor = "";
+            }, 2500);
+          })
+          .catch(() => {
+            // Fallback
+            const ta = document.createElement("textarea");
+            ta.value = ip;
+            ta.style.position = "fixed";
+            ta.style.opacity = "0";
+            document.body.appendChild(ta);
+            ta.focus();
+            ta.select();
+            document.execCommand("copy");
+            document.body.removeChild(ta);
+          });
+      }
+    </script>
   </body>
 </html>

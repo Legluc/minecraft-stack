@@ -1,1 +1,41 @@
 @import "tailwindcss";
+
+/* Auto-detect templates */
+@source "../../views";
+@source "../../server.js";
+
+@theme {
+  /* Palette Minecraft */
+  --color-mc-green: #5b8731;
+  --color-mc-green-light: #8db360;
+  --color-mc-green-bright: #7ec850;
+  --color-mc-brown: #825432;
+  --color-mc-brown-dark: #5c3d1e;
+  --color-mc-dirt: #a0785a;
+  --color-mc-sky: #87ceeb;
+  --color-mc-night: #0d1b2a;
+
+  /* Typographies */
+  --font-sans: "Nunito", ui-sans-serif, system-ui, sans-serif;
+  --font-minecraft: "Press Start 2P", monospace;
+}
+
+/* Smooth scroll */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Animation flottante */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-14px);
+  }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
