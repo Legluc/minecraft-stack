@@ -39,7 +39,7 @@ git push -u origin main
 
 ```bash
 # Sur le VPS
-git clone git@github.com:<user>/minecraft-stack.git
+git clone git@github.com:<Legluc>/minecraft-stack.git
 cd minecraft-stack
 ```
 
