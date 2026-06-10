@@ -1,0 +1,21 @@
+services:
+  minecraft:
+    image: itzg/minecraft-server
+    environment:
+      EULA: "TRUE"
+      TYPE: "PAPER"
+      MEMORY: "2G"
+    ports:
+      - "25566:25565"
+    volumes:
+      - minecraft-data:/data
+      - ./plugins:/data/plugins
+    networks:
+      - internal
+    restart: unless-stopped
+
+volumes:
+  minecraft-data:
+
+networks:
+  internal:
