@@ -22,8 +22,37 @@ services:
       - public
     restart: unless-stopped
 
+  prometheus:
+    image: prom/prometheus
+    ports:
+      - "8083:9090"
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus-data:/prometheus
+    networks:
+      - internal
+    restart: unless-stopped
+
+  node-exporter:
+    image: prom/node-exporter
+    networks:
+      - internal
+    restart: unless-stopped
+
+  cadvisor:
+    image: gcr.io/cadvisor/cadvisor
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:ro
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+    networks:
+      - internal
+    restart: unless-stopped
+
 volumes:
   minecraft-data:
+  prometheus-data:
 
 networks:
   internal:
