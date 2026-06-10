@@ -50,9 +50,22 @@ services:
       - internal
     restart: unless-stopped
 
+  grafana:
+    image: grafana/grafana
+    ports:
+      - "8081:3000"
+    volumes:
+      - grafana-data:/var/lib/grafana
+      - ./grafana/provisioning:/etc/grafana/provisioning
+    networks:
+      - internal
+      - public
+    restart: unless-stopped
+
 volumes:
   minecraft-data:
   prometheus-data:
+  grafana-data:
 
 networks:
   internal:
